@@ -471,8 +471,14 @@ six==1.15.0 \
 termcolor==1.1.0 \
     --hash=sha256:1d6d69ce66211143803fbc56652b41d73b4a400a2891d7bf7a1cdf4c02de613b
     # via thamos
+<<<<<<< HEAD
 thamos==1.13.0 \
     --hash=sha256:6aee364066147474ffc19c4ce90448d8a79bd92fbb90430d6573b930ded823f4
+=======
+thamos==1.7.0 \
+    --hash=sha256:2f2a6c77809c7d85e8d461dcff16914fda77a28d729f2fc214a148aec376be67 \
+    --hash=sha256:e0df2c224067ae07392a640af9d458b03beb25e0727bf2ce00e6312170b04366
+>>>>>>> 1fe50d0... Update to match github.com/harshad16/s2i-thoth
     # via -r requirements.in
 thoth-analyzer==0.1.8 \
     --hash=sha256:3f830334a3ba725cacf64ccc756e42f0c7946fd8038da6565cb2de569ea5c9c1 \
