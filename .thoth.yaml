@@ -11,16 +11,6 @@ runtime_environments:
     recommendation_type: latest
 
 managers:
-  - name: version
-    configuration:
-      maintainers:
-        - harshad16
-        - goern
-        - fridex
-      assignees:
-        - sesheta
-      labels: [bot]
-      changelog_file: false
   - name: update
     configuration:
       labels: [bot]
