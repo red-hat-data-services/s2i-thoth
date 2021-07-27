@@ -25,15 +25,20 @@ LABEL summary="$SUMMARY" \
     maintainer="Thoth Station <aicoe-thoth@redhat.com>"
 
 USER 0
-COPY ./s2i_assemble.patch /tmp/s2i_assemble.patch
+COPY ubi8-py38/s2i_assemble.patch /tmp/s2i_assemble.patch
+
+COPY ubi8-py38/requirements.txt .
+
+COPY assemble .
+
 RUN TMPFILE=$(mktemp) && \
     TMPFILE_ASSEMBLE=$(mktemp) && \
     pushd "${STI_SCRIPTS_PATH}" && patch -p 1 </tmp/s2i_assemble.patch && popd && \
     pip3 install -U "pip==20.3.3" && \
     /usr/bin/pip3 install -U "pip==20.3.3" && \
-    curl "https://raw.githubusercontent.com/thoth-station/s2i-thoth/master/ubi8-py38/requirements.txt" -o requirements.txt && \
-    MICROPIPENV_NO_LOCKFILE_WRITE=1 MICROPIPENV_PIP_BIN=/usr/bin/pip3 curl https://raw.githubusercontent.com/thoth-station/micropipenv/master/micropipenv.py | /usr/bin/python3 - install -- && \
-    curl "https://raw.githubusercontent.com/thoth-station/s2i-thoth/master/assemble" -o "${TMPFILE_ASSEMBLE}" && \
+    /usr/bin/pip3 install -U "micropipenv" && \
+    MICROPIPENV_NO_LOCKFILE_WRITE=1 MICROPIPENV_PIP_BIN=/usr/bin/pip3 micropipenv install && \
+    cp assemble "${TMPFILE_ASSEMBLE}" && \
     cp "${STI_SCRIPTS_PATH}/assemble" "${TMPFILE}" && \
     head -n1 "${TMPFILE}" >"${STI_SCRIPTS_PATH}/assemble" && \
     cat "${TMPFILE_ASSEMBLE}" >>"${STI_SCRIPTS_PATH}/assemble" && \
