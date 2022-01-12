@@ -1,9 +1,9 @@
---- a/assemble	2021-04-17 00:25:31.462528247 -0400
-+++ b/assemble	2021-04-17 00:30:46.454755974 -0400
+--- a/assemble	2021-12-01 08:32:09.000000000 -0500
++++ b/assemble	2022-01-12 13:59:01.509873210 -0500
 @@ -14,38 +14,8 @@
      python3.8 -m venv $1
  }
-
+ 
 -# Install pipenv or micropipenv to the separate virtualenv to isolate it
 -# from system Python packages and packages in the main
 -# virtualenv. Executable is simlinked into ~/.local/bin
@@ -27,7 +27,7 @@
 -}
 -
  set -e
-
+ 
 -# First of all, check that we don't have disallowed combination of ENVs
 -if [[ ! -z "$ENABLE_PIPENV" && ! -z "$ENABLE_MICROPIPENV" ]]; then
 -  echo "ERROR: Pipenv and micropipenv cannot be enabled at the same time!"
@@ -39,27 +39,10 @@
  shopt -s dotglob
  echo "---> Installing application source ..."
  mv /tmp/src/* "$HOME"
-@@ -53,16 +23,6 @@
- # set permissions for any installed artifacts
- fix-permissions /opt/app-root -P
-
--# We have to first upgrade pip to at least 19.3 because:
--# * pip < 9 does not support different packages' versions for Python 2/3
--# * pip < 19.3 does not support manylinux2014 wheels. Only manylinux2014 wheels
--#   support platforms like ppc64le, aarch64 or armv7
--echo "---> Upgrading pip to version 19.3.1 ..."
--if ! pip install -U "pip==19.3.1"; then
--  echo "WARNING: Installation of 'pip==19.3.1' failed, trying again from official PyPI with pip --isolated install"
--  pip install --isolated -U "pip==19.3.1"
--fi
--
- if [[ ! -z "$UPGRADE_PIP_TO_LATEST" ]]; then
-   echo "---> Upgrading pip to latest version ..."
-   if ! pip install -U pip setuptools wheel; then
-@@ -71,26 +31,9 @@
+@@ -62,26 +32,9 @@
    fi
  fi
-
+ 
 -if [[ ! -z "$ENABLE_PIPENV" ]]; then
 -  if [[ ! -z "$PIN_PIPENV_VERSION" ]]; then
 -    # Add == as a prefix to pipenv version, if defined
@@ -85,3 +68,4 @@
 +else
    pip install -r requirements.txt
  fi
+ 
