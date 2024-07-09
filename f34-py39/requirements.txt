@@ -593,7 +593,7 @@ yaspin==2.0.0 \
     --hash=sha256:0498039b3e110f53824417a9f59418a20843e8752b8b15c26bb81a659d4aec5c \
     --hash=sha256:9da195db6630b76f0d37612f195dd7c325e280ad398dae4fcf30890a124ceb74
     # via thamos
-zipp==3.4.1 \
+zipp==3.19.1 \
     --hash=sha256:3607921face881ba3e026887d8150cca609d517579abe052ac81fc5aeffdbd76 \
     --hash=sha256:51cb66cc54621609dd593d1787f286ee42a5c0adbb4b29abea5a63edc3e03098
     # via importlib-metadata
